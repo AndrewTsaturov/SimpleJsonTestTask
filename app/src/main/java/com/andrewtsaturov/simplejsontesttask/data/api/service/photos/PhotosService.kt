@@ -8,5 +8,5 @@ import retrofit2.http.Query
 
 interface PhotosService {
     @GET("photos")
-    fun getPosts(@Query("albumId") postId: Long): Single<List<PhotoResponse>>
+    fun getPhotos(@Query("albumId") postId: Long): Single<List<PhotoResponse>>
 }

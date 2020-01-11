@@ -6,8 +6,8 @@ class CommentResponse(
     @SerializedName("postId") val postId: Long,
     @SerializedName("id") val id: Long,
     @SerializedName("name") val name: String,
-    @SerializedName("email") val email: Long,
-    @SerializedName("body") val body: Long
+    @SerializedName("email") val email: String,
+    @SerializedName("body") val body: String
 )
 
 //{

@@ -6,8 +6,8 @@ class PhotoResponse(
     @SerializedName("postId") val postId: Long,
     @SerializedName("id") val id: Long,
     @SerializedName("title") val title: String,
-    @SerializedName("url") val url: Long,
-    @SerializedName("thumbnailUrl") val thumbnailUrl: Long
+    @SerializedName("url") val url: String,
+    @SerializedName("thumbnailUrl") val thumbnailUrl: String
 )
 
 //{
