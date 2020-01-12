@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andrewtsaturov.simplejsontesttask.R
 import com.andrewtsaturov.simplejsontesttask.domain.etnity.Post
 import com.andrewtsaturov.simplejsontesttask.presentation.common.BaseFragment
+import com.andrewtsaturov.simplejsontesttask.presentation.common.OnAllScrolledListener
+import com.andrewtsaturov.simplejsontesttask.presentation.common.Paginator
 import com.andrewtsaturov.simplejsontesttask.presentation.presenter.posts.PostsPresenter
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.posts.adapter.PostItem
 import com.andrewtsaturov.simplejsontesttask.presentation.view.PostsView
@@ -26,19 +28,28 @@ class PostsFragment: BaseFragment(), PostsView, OnPostClickListener {
     @ProvidePresenter
     fun providePresenter(): PostsPresenter = get()
 
-    private val postAdapter = GroupAdapter<GroupieViewHolder>()
+    private var postAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerViewPosts.apply {
-            adapter = postAdapter
-            layoutManager = LinearLayoutManager(context)
+            val manager = LinearLayoutManager(context)
+            recyclerViewPosts.adapter = postAdapter
+            layoutManager = manager
+            addOnScrollListener(Paginator(object : OnAllScrolledListener {
+                override fun onScrolled() {
+                    presenter.loadNextPage()
+                }
+            }, manager))
         }
     }
 
     override fun updatePosts(posts: List<Post>) {
-        postAdapter.update(posts.map { PostItem(it, this@PostsFragment) })
+        postAdapter.clear()
+        postAdapter.addAll(posts.map { PostItem(it, this@PostsFragment) })
+
+        postAdapter.notifyDataSetChanged()
     }
 
     override fun onPostClick(postId: Long) {
