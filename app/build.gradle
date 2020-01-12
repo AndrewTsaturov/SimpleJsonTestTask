@@ -45,6 +45,7 @@ ext {
     rxRelayVersion = '2.1.0'
     moxyVersion = '1.7.0'
     permissionDispatcherVersion = '4.6.0'
+    grupieVersion = '2.7.0'
 }
 
 dependencies {
@@ -96,4 +97,8 @@ dependencies {
 
     implementation "org.permissionsdispatcher:permissionsdispatcher:$permissionDispatcherVersion"
     kapt "org.permissionsdispatcher:permissionsdispatcher-processor:$permissionDispatcherVersion"
+
+    implementation "com.xwray:groupie:$grupieVersion"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$grupieVersion"
+    implementation "com.xwray:groupie-databinding:$grupieVersion"
 }

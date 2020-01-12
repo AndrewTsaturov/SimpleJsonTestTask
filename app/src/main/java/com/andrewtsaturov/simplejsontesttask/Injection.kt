@@ -28,24 +28,58 @@ import com.andrewtsaturov.simplejsontesttask.domain.repository.photos.IPhotosRep
 import com.andrewtsaturov.simplejsontesttask.domain.repository.photos.PhotosRepository
 import com.andrewtsaturov.simplejsontesttask.domain.repository.posts.IPostsRepository
 import com.andrewtsaturov.simplejsontesttask.domain.repository.posts.PostRepository
+import com.andrewtsaturov.simplejsontesttask.presentation.common.ISchedulers
+import com.andrewtsaturov.simplejsontesttask.presentation.common.Schedulers
 import com.andrewtsaturov.simplejsontesttask.presentation.navigation.LocalCiceroneHolder
+import com.andrewtsaturov.simplejsontesttask.presentation.presenter.bottom_nav.BottomNavPresenter
+import com.andrewtsaturov.simplejsontesttask.presentation.presenter.bottom_nav.PostTabPresenter
+import com.andrewtsaturov.simplejsontesttask.presentation.presenter.posts.PostsPresenter
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import okhttp3.ConnectionSpec
+import java.util.Arrays.asList
+import android.os.Build
+import java.util.*
+
 
 val app = module {
     single { LocalCiceroneHolder() }
+
+    single {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        var tlsSpecs = listOf(ConnectionSpec.MODERN_TLS, ConnectionSpec.CLEARTEXT)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            tlsSpecs = listOf(ConnectionSpec.COMPATIBLE_TLS, ConnectionSpec.CLEARTEXT)
+        }
+
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectionSpecs(tlsSpecs)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
     single {
         Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-            .client(OkHttpClient())
+            .client(get())
             .baseUrl("http://jsonplaceholder.typicode.com/")
             .build()
     }
+
+    single {Schedulers() as ISchedulers}
 
     single {get<Retrofit>().create(PostsService::class.java)}
     single {PostsCache() as IPostsCache}
@@ -66,4 +100,9 @@ val app = module {
     single {PhotosCache() as IPhotosCache}
     single { PhotosRepository(get(), get(), get()) as IPhotosRepository}
     single { PhotosInteractor(get()) as IPhotosInteractor}
+
+    factory { BottomNavPresenter() }
+    factory { PostTabPresenter(get<LocalCiceroneHolder>().postsRouter) }
+
+    factory { PostsPresenter(get<LocalCiceroneHolder>().postsRouter, get(), get()) }
 }

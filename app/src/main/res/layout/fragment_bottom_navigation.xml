@@ -15,6 +15,7 @@
         android:background="@color/primary"
         app:itemIconTint="@drawable/bottom_navigation_colors"
         app:itemTextColor="@drawable/bottom_navigation_colors"
+        app:menu="@menu/menu_bottom_nav"
         />
 
     <com.mintrocket.zeroplus.presentation.navigation.BottomNavigationViewPager

@@ -5,14 +5,15 @@ import android.os.Bundle
 import com.andrewtsaturov.simplejsontesttask.R
 import com.andrewtsaturov.simplejsontesttask.presentation.common.OnBackPressed
 import com.andrewtsaturov.simplejsontesttask.presentation.navigation.LocalCiceroneHolder
+import com.andrewtsaturov.simplejsontesttask.presentation.navigation.Screens
 import org.koin.android.ext.android.get
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 class MainActivity : AppCompatActivity() {
 
-    private val navigatorHolder = get<LocalCiceroneHolder>().navigationHolder
+    private val navigatorHolder = get<LocalCiceroneHolder>().rootHolder
     private val navigator by lazy { SupportAppNavigator(this, R.id.fragment_container) }
-    private val router = get<LocalCiceroneHolder>().router
+    private val router = get<LocalCiceroneHolder>().rootRouter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.popBackStack()
-            //router.newRootScreen(Screens.ChatScreen())
+            router.newRootScreen(Screens.StartScreen())
         }
     }
 
