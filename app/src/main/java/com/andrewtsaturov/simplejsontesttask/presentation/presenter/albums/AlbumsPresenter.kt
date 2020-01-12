@@ -1,6 +1,6 @@
 package com.andrewtsaturov.simplejsontesttask.presentation.presenter.albums
 
-import com.andrewtsaturov.simplejsontesttask.domain.interactor.albums.AlbumsInteractor
+import com.andrewtsaturov.simplejsontesttask.domain.interactor.albums.IAlbumsInteractor
 import com.andrewtsaturov.simplejsontesttask.presentation.common.ISchedulers
 import com.andrewtsaturov.simplejsontesttask.presentation.navigation.Screens
 import com.andrewtsaturov.simplejsontesttask.presentation.view.AlbumsView
@@ -15,7 +15,7 @@ import ru.terrakok.cicerone.Router
 class AlbumsPresenter(
     private val router: Router,
     private val schedulers: ISchedulers,
-    private val albumsInteractor: AlbumsInteractor
+    private val albumsInteractor: IAlbumsInteractor
 ): MvpPresenter<AlbumsView>() {
     private val disposable = CompositeDisposable()
 

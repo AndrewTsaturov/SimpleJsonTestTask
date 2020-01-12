@@ -8,7 +8,6 @@ import com.andrewtsaturov.simplejsontesttask.R
 import com.andrewtsaturov.simplejsontesttask.domain.etnity.Album
 import com.andrewtsaturov.simplejsontesttask.domain.etnity.Photo
 import com.andrewtsaturov.simplejsontesttask.presentation.common.BaseFragment
-import com.andrewtsaturov.simplejsontesttask.presentation.common.GridSpacingItemDecoration
 import com.andrewtsaturov.simplejsontesttask.presentation.common.OnBackPressed
 import com.andrewtsaturov.simplejsontesttask.presentation.presenter.photos.PhotosPresenter
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.photo.adapter.PhotoItem
@@ -47,19 +46,6 @@ class PhotosFragment(): BaseFragment(), PhotosView, OnPhotoClickListener, OnBack
 
         recyclerViewAlbum.apply {
             layoutManager = GridLayoutManager(context, 3)
-            if (itemDecorationCount == 0)
-                addItemDecoration(
-                    GridSpacingItemDecoration(
-                        2,
-                        TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP,
-                            9.0f,
-                            context.resources.displayMetrics
-                        ).toInt(),
-                        false,
-                        0
-                    )
-                )
             adapter = photosAdapter
 
         }

@@ -16,7 +16,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_albums.*
-import kotlinx.android.synthetic.main.fragment_posts.*
 import org.koin.android.ext.android.get
 
 class AlbumsFragment: BaseFragment(), AlbumsView, OnAlbumsClickListener {
@@ -35,7 +34,7 @@ class AlbumsFragment: BaseFragment(), AlbumsView, OnAlbumsClickListener {
 
         recyclerViewAlbums.apply {
             val manager = LinearLayoutManager(context)
-            recyclerViewPosts.adapter = albumsAdapter
+            adapter = albumsAdapter
             layoutManager = manager
             addOnScrollListener(Paginator(object : OnAllScrolledListener {
                 override fun onScrolled() {

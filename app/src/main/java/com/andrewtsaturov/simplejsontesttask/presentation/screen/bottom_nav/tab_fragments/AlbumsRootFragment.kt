@@ -6,12 +6,13 @@ import com.andrewtsaturov.simplejsontesttask.presentation.common.OnBackPressed
 import com.andrewtsaturov.simplejsontesttask.presentation.navigation.LocalCiceroneHolder
 import com.andrewtsaturov.simplejsontesttask.presentation.presenter.bottom_nav.AlbumsTabPresenter
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.MainActivity
+import com.andrewtsaturov.simplejsontesttask.presentation.view.AlbumsTabView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import org.koin.android.ext.android.get
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
-class AlbumsRootFragment: BaseFragment(), OnBackPressed {
+class AlbumsRootFragment: BaseFragment(), AlbumsTabView, OnBackPressed {
     override val layoutResource: Int = R.layout.fragment_root_tab_albums
 
     private val navigatorHolder = get<LocalCiceroneHolder>().albumsHolder
