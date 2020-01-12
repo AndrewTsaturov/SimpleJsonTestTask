@@ -104,7 +104,7 @@ val app = module {
 
     factory { BottomNavPresenter() }
     factory { PostTabPresenter(get<LocalCiceroneHolder>().postsRouter) }
-
     factory { PostsPresenter(get<LocalCiceroneHolder>().postsRouter, get(), get()) }
     factory { CommentsPresenter(get<LocalCiceroneHolder>().postsRouter, get(), get())}
+    factory {  }
 }

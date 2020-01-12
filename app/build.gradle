@@ -101,4 +101,7 @@ dependencies {
     implementation "com.xwray:groupie:$grupieVersion"
     implementation "com.xwray:groupie-kotlin-android-extensions:$grupieVersion"
     implementation "com.xwray:groupie-databinding:$grupieVersion"
+
+    implementation "com.github.stfalcon:frescoimageviewer:0.5.0"
+    implementation 'com.facebook.fresco:fresco:2.0.0'
 }

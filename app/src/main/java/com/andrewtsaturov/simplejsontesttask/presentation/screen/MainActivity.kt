@@ -37,8 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? OnBackPressed)?.onBackPressed()
-            ?: back()
+        (supportFragmentManager.findFragmentById(R.id.fragment_container) as? OnBackPressed)?.onBackPressed() ?: back()
     }
 
     fun back(){

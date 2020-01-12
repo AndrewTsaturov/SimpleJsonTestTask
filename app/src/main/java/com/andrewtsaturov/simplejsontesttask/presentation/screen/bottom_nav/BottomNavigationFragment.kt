@@ -57,6 +57,12 @@ class BottomNavigationFragment: BaseFragment(), BottomNavView, BottomNavigationV
     }
 
     override fun onBackPressed() {
-        (pagerAdapter?.getItem(bottomNavigationViewPager.currentItem) as? OnBackPressed)?.onBackPressed() ?: (activity as MainActivity).back()
+        (pagerAdapter?.getItem(bottomNavigationViewPager.currentItem) as? OnBackPressed)?.onBackPressed() ?: back()
+    }
+
+    fun back(){
+        if(activity is MainActivity) {
+            (activity as MainActivity).back()
+        }
     }
 }
