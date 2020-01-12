@@ -1,5 +1,6 @@
 package com.andrewtsaturov.simplejsontesttask.presentation.presenter.comments
 
+import com.andrewtsaturov.simplejsontesttask.domain.etnity.Post
 import com.andrewtsaturov.simplejsontesttask.domain.interactor.comments.ICommentsInteractor
 import com.andrewtsaturov.simplejsontesttask.presentation.common.ISchedulers
 import com.andrewtsaturov.simplejsontesttask.presentation.view.CommentsView
@@ -17,6 +18,8 @@ class CommentsPresenter(
     private val commentsIteractor: ICommentsInteractor
     ): MvpPresenter<CommentsView>() {
     private val disposable = CompositeDisposable()
+
+    private var post: Post? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -46,5 +49,31 @@ class CommentsPresenter(
 
     fun Disposable.untilDestroy() {
         disposable += this
+    }
+
+    fun back() {
+        router.exit()
+    }
+
+    fun loadData(postID: Long) {
+        if(post == null)
+            commentsIteractor.getPostById(postID)
+            .subscribeOn(schedulers.io())
+            .doOnSuccess {
+                commentsIteractor
+                    .getCommtensByPostId(postID)
+                    .subscribeOn(schedulers.io())
+                    .observeOn(schedulers.ui())
+                    .subscribe({}, {
+                        it.printStackTrace()
+                    })
+                    .untilDestroy()
+            }.observeOn(schedulers.ui())
+            .subscribe({
+                post = it
+            }, {
+                it.printStackTrace()
+            })
+            .untilDestroy()
     }
 }

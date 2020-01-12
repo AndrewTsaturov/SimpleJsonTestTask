@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             ?: back()
     }
 
-    private fun back(){
+    fun back(){
         moveTaskToBack(true)
     }
 }

@@ -2,6 +2,7 @@ package com.andrewtsaturov.simplejsontesttask.presentation.screen.bottom_nav.ada
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.bottom_nav.tab_fragments.AlbumsRootFragment
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.bottom_nav.tab_fragments.PostRootFragment

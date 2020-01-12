@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit
 import okhttp3.ConnectionSpec
 import java.util.Arrays.asList
 import android.os.Build
+import com.andrewtsaturov.simplejsontesttask.presentation.presenter.comments.CommentsPresenter
 import java.util.*
 
 
@@ -105,4 +106,5 @@ val app = module {
     factory { PostTabPresenter(get<LocalCiceroneHolder>().postsRouter) }
 
     factory { PostsPresenter(get<LocalCiceroneHolder>().postsRouter, get(), get()) }
+    factory { CommentsPresenter(get<LocalCiceroneHolder>().postsRouter, get(), get())}
 }

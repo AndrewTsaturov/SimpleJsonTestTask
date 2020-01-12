@@ -3,13 +3,13 @@ package com.andrewtsaturov.simplejsontesttask.presentation.screen.posts
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.andrewtsaturov.simplejsontesttask.R
 import com.andrewtsaturov.simplejsontesttask.domain.etnity.Post
 import com.andrewtsaturov.simplejsontesttask.presentation.common.BaseFragment
 import com.andrewtsaturov.simplejsontesttask.presentation.common.OnAllScrolledListener
 import com.andrewtsaturov.simplejsontesttask.presentation.common.Paginator
 import com.andrewtsaturov.simplejsontesttask.presentation.presenter.posts.PostsPresenter
+
 import com.andrewtsaturov.simplejsontesttask.presentation.screen.posts.adapter.PostItem
 import com.andrewtsaturov.simplejsontesttask.presentation.view.PostsView
 import com.arellomobile.mvp.presenter.InjectPresenter
